@@ -1,0 +1,157 @@
+<h2>Server Health Check</h2>
+<hr>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#table_id td.colorpick').each(function(){
+
+            if($(this).text() == undefined || $(this).text() == "" || $(this).text() == "NA") {
+                $(this).css('background-color','yellow');
+            }
+            else if ($(this).text() != "OK" || $(this).text() == "CRITICAL") {
+                $(this).css('background-color','red');
+            }
+            else {
+                $(this).css('background-color','green');
+            }
+        });
+    });
+
+</script>
+
+<p>
+
+    <table border="1" style="width:100%" id="table_id">
+
+        <tr bgcolor=gray>
+            <th> Server</th>
+            <th> Driver App Server Health</th>
+            <th> Api Server Health</th>
+            <th> Consumer App Server</th>
+            <th> Memory Usage</th>
+        </tr>
+    <% for(var i=0; i< Object.keys(result).length;i++) {%>
+        <tr>
+            <td >
+                <%= result[Object.keys(result)[i]].server_name%>
+            </td>
+            <td class="colorpick">
+                <% if(result[Object.keys(result)[i]].driver_node) {%>
+                    <% if (result[Object.keys(result)[i]].driver_node.health) { %>
+                        health : <%= result[Object.keys(result)[i]].driver_node.health %>
+                    <% } else { %>
+                         health : NA
+                    <% } %>
+                </br>
+                     <% if (result[Object.keys(result)[i]].driver_node.memory_usage_threshold) { %>
+                        Memory Usage : <%= result[Object.keys(result)[i]].driver_node.memory_usage %> (<%= result[Object.keys(result)[i]].driver_node.memory_usage_threshold %>)
+                     <% } else { %>
+                        Memory Usage : NA
+                     <% } %>
+                </br>
+                     <% if (result[Object.keys(result)[i]].driver_node.cpu_usage_threshold) { %>
+                        CPU Usage : <%= result[Object.keys(result)[i]].driver_node.cpu_usage %> (<%= result[Object.keys(result)[i]].driver_node.cpu_usage_threshold %>)
+                    <% } else { %>
+                        CPU Usage : NA
+                    <% } %>
+                </br>
+                    <% if (result[Object.keys(result)[i]].driver_node.open_TCP_file_desc_threshold) { %>
+                        File Descriptor Usage : <%= result[Object.keys(result)[i]].driver_node.open_TCP_file_desc %> (<%= result[Object.keys(result)[i]].driver_node.open_TCP_file_desc_threshold %>)
+                    <% } else { %>
+                        File Descriptor Usage : NA
+                    <% } %>
+                <% } else { %>
+                    NA
+                <%}%>
+
+            </td>
+            <td class="colorpick">
+                <% if(result[Object.keys(result)[i]].api_node) { %>
+                    <%if(result[Object.keys(result)[i]].api_node.health) { %>
+                        health : <%= result[Object.keys(result)[i]].api_node.health %>
+                    <% } else { %>
+                        health : NA
+                    <% }%>
+                </br>
+                    <% if (result[Object.keys(result)[i]].api_node.memory_usage_threshold) { %>
+                        Memory Usage : <%= result[Object.keys(result)[i]].api_node.memory_usage %> (<%= result[Object.keys(result)[i]].api_node.memory_usage_threshold %>)
+                    <% } else { %>
+                        Memory Usage : NA
+                    <% } %>
+                </br>
+                    <% if (result[Object.keys(result)[i]].api_node.cpu_usage_threshold) { %>
+                        CPU Usage : <%= result[Object.keys(result)[i]].api_node.cpu_usage %> (<%= result[Object.keys(result)[i]].api_node.cpu_usage_threshold %>)
+                    <% } else { %>
+                        CPU Usage : NA
+                    <% } %>
+                </br>
+                    <% if (result[Object.keys(result)[i]].api_node.open_TCP_file_desc_threshold) { %>
+                        File Descriptor Usage : <%= result[Object.keys(result)[i]].api_node.open_TCP_file_desc %> (<%= result[Object.keys(result)[i]].api_node.open_TCP_file_desc_threshold %>)
+                    <% } else { %>
+                        File Descriptor Usage : NA
+                    <% } %>
+                <% } else { %>
+                    NA
+                <% } %>
+            </td>
+            <td class="colorpick">
+                <% if (result[Object.keys(result)[i]].consumer_node) { %>
+                    <% if(result[Object.keys(result)[i]].consumer_node.health) { %>
+                         health : <%= result[Object.keys(result)[i]].consumer_node.health %>
+                    <% } else { %>
+                        health : NA
+                    <% }%>
+                </br>
+                    <% if (result[Object.keys(result)[i]].consumer_node.memory_usage_threshold) { %>
+                        Memory Usage : <%= result[Object.keys(result)[i]].consumer_node.memory_usage %> (<%= result[Object.keys(result)[i]].consumer_node.memory_usage_threshold %>)
+                    <% } else { %>
+                        Memory Usage : NA
+                    <% } %>
+                </br>
+                    <% if (result[Object.keys(result)[i]].consumer_node.cpu_usage_threshold) { %>
+                        CPU Usage : <%= result[Object.keys(result)[i]].consumer_node.cpu_usage %> (<%= result[Object.keys(result)[i]].consumer_node.cpu_usage_threshold %>)
+                    <% } else { %>
+                        CPU Usage : NA
+                    <% } %>
+                </br>
+                    <% if (result[Object.keys(result)[i]].consumer_node.open_TCP_file_desc_threshold) { %>
+                        File Descriptor Usage : <%= result[Object.keys(result)[i]].consumer_node.open_TCP_file_desc %> (<%= result[Object.keys(result)[i]].consumer_node.open_TCP_file_desc_threshold %>)
+                    <% } else { %>
+                        File Descriptor Usage : NA
+                    <% } %>
+                <% } else { %>
+                    NA
+                <% } %>
+            </td>
+            <td class="colorpick">
+                <% if(result[Object.keys(result)[i]].disk_check) {%>
+                    <%= result[Object.keys(result)[i]].disk_check.disk_usage %>
+                <% } else { %>
+                    NA
+                <% } %>
+            </td>
+        </tr>
+    <% } %>
+
+    </table>
+    <br/>
+    <br/>
+    <h4>Reset</h4>
+    <hr>
+    <form method="post" action="/reset">
+    Host :<select name="host">
+        <% for(var i=0; i< Object.keys(result).length;i++) {%>
+            <option value=<%= result[Object.keys(result)[i]].server_name%>><%= result[Object.keys(result)[i]].server_name%></option>
+        <% } %>
+    </select>
+    <br/>
+    Server: <select name="server">
+        <option value="device_handler"> device handler</option>
+        <option value="api_server">api server</option>
+        <option value="consumer_app">consumer app</option>
+    </select>
+        <input type="submit" value="reset">
+    </form>
+</p>

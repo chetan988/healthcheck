@@ -1,0 +1,6 @@
+{
+  "host_map" : {
+    "vtsdev01.tfsit.de" : "dev1",
+    "vtsdev02.tfsit.de" : "dev2"
+  }
+}

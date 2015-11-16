@@ -1,0 +1,11 @@
+{
+  "name": "Healthcheck",
+  "version": "0.1.0",
+  "dependencies": {
+    "ssh2" : "*",
+    "express": "*",
+    "ejs" : "*",
+    "body-parser": "*",
+    "multer": "*"
+  }
+}

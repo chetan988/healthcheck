@@ -1,0 +1,33 @@
+{
+  "dev1" : {
+    "username" : "chetan.das",
+    "nodename" : "vtsdev01.tfsit.de",
+    "password" : "chetan@123",
+    "port" : "46833",
+    "primary_disk" : "/dev/md2",
+    "disk_usage_threshold" : 70,
+    "cpu_usage_threshold" : 90,
+    "memory_usage_threshold" : 90,
+    "file_descriptor_threshold" :3000,
+    "isSudoUser" : false,
+    "nodeUser" : "tfsuser",
+    "nodePassword" : "C(2Xbv}Y4K",
+    "tfs_loc" : "/var/www/tracker_node/tfs_vts/"
+  },
+  "dev2" : {
+    "username" : "chetan.das",
+    "nodename" : "vtsdev02.tfsit.de",
+    "password" : "chetan@123",
+    "port" : "46833",
+    "primary_disk" : "/dev/md2",
+    "disk_usage_threshold" : 70,
+    "cpu_usage_threshold" : 90,
+    "memory_usage_threshold" : 90,
+    "file_descriptor_threshold" :3000,
+    "isSudoUser" : false,
+    "nodeUser" : "tfsuser",
+    "nodePassword" : "C(2Xbv}Y4K",
+    "tfs_loc" : "/var/www/tracker_node/tfs_vts/"
+  }
+
+}
